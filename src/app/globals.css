@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --oris-beige: #caab8f;
+  --oris-green: #6f874b;
+  --oris-white: #ffffff;
+  --shrine-dark: #1a1510;
+  --shrine-shadow: #0d0a08;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-readex), sans-serif;
+  background: var(--shrine-dark);
+  color: var(--oris-white);
+}
+
+/* Hieroglyph wall texture overlay */
+.hieroglyph-wall {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23caab8f' stroke-opacity='0.08' stroke-width='0.5'%3E%3Cpath d='M10 10 L20 15 L15 25 L5 20 Z'/%3E%3Cpath d='M35 8 L42 18 L38 28 L30 22 Z'/%3E%3Cpath d='M50 35 L55 45 L48 52 L42 48 Z'/%3E%3Cpath d='M8 40 L18 42 L22 52 L12 55 Z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Sand / golden particle feel */
+.sand-texture {
+  background: radial-gradient(ellipse at center, rgba(202, 171, 143, 0.15) 0%, transparent 70%),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(202, 171, 143, 0.03) 2px,
+      rgba(202, 171, 143, 0.03) 4px
+    );
+}
+
+/* Moving golden hieroglyphs (subtle animation on reveal) */
+@keyframes hieroglyph-float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.06; }
+  50% { transform: translate(2px, -3px) rotate(1deg); opacity: 0.1; }
+}
+
+.hieroglyph-wall.animate-hieroglyph {
+  position: relative;
+}
+.hieroglyph-wall.animate-hieroglyph::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='%23caab8f' fill-opacity='0.12'%3E%3Cpath d='M20 10 L30 20 L25 35 L15 30 Z'/%3E%3Cpath d='M50 15 L58 28 L52 40 L42 38 Z'/%3E%3C/g%3E%3C/svg%3E");
+  animation: hieroglyph-float 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Mobile: ensure touch scroll and safe areas */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
