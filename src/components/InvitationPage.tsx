@@ -22,6 +22,7 @@ export default function InvitationPage() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const inviteRef = useRef<HTMLDivElement>(null);
   const orisInvitationRef = useRef<HTMLParagraphElement>(null);
+  const [guestName, setGuestName] = useState("");
 
   useEffect(() => {
     const pinSection = pinSectionRef.current;
@@ -149,7 +150,18 @@ export default function InvitationPage() {
               style={{ opacity: 0 }}
             >
               <h2 className="mb-2 text-2xl font-medium tracking-wide text-oris-beige md:text-3xl">مَلاذ أوريس</h2>
-              <p className="mb-6 text-lg font-medium text-oris-green md:text-xl">ملاذ الحضارة</p>
+              <p className="mb-4 text-lg font-medium text-oris-green md:text-xl">ملاذ الحضارة</p>
+              <div className="mb-6 flex flex-wrap items-center justify-center gap-2" dir="rtl">
+                <span className="text-lg text-oris-beige md:text-xl">السيد/ة</span>
+                <input
+                  type="text"
+                  value={guestName}
+                  onChange={(e) => setGuestName(e.target.value)}
+                  placeholder="ضع اسمك الكريم"
+                  className="min-w-[180px] max-w-[240px] rounded border border-oris-beige/40 bg-oris-beige/10 px-3 py-2 text-center font-readex text-lg text-oris-white placeholder:text-oris-beige/50 focus:border-oris-green focus:outline-none md:text-xl"
+                  dir="rtl"
+                />
+              </div>
               <p className="text-base leading-loose md:text-xl md:leading-loose" dir="rtl">
                 {INVITATION_ARABIC}
               </p>
